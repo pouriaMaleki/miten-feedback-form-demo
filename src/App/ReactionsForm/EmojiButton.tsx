@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
 const Emoji = styled.div`
@@ -17,7 +17,11 @@ const Root = styled.button`
   -webkit-tap-highlight-color: transparent;
   border-radius: 0.375rem;
   padding: 5px;
-  :focus-within {
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px rgb(66 153 225 / 60%);
   }
@@ -36,10 +40,11 @@ export type Props = {
   onClick: () => void;
   emoji: string;
   label: string;
+  tabIndex: number;
 };
 
 export const EmojiButton: FC<Props> = (props) => (
-  <Root onClick={props.onClick}>
+  <Root tabIndex={props.tabIndex} onClick={props.onClick}>
     <Emoji>{props.emoji}</Emoji>
     <Label>{props.label}</Label>
   </Root>

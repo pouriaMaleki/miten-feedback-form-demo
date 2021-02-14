@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef, ForwardRefRenderFunction } from "react";
 import styled from "styled-components";
 
 export interface StyledProps {
@@ -56,23 +56,19 @@ type CheckboxProps = Omit<
 > &
   Props;
 
-export const ButtonCheckbox = ({
-  label,
-  dataTestId,
-  className,
-  ...props
-}: CheckboxProps) => (
+const ButtonCheckboxComponent: ForwardRefRenderFunction<
+  HTMLInputElement,
+  CheckboxProps
+> = ({ label, dataTestId, className, ...props }, ref) => (
   <CheckboxRoot
     aria-label={label}
     data-testid={dataTestId}
     disabled={props.disabled}
     className={className}
   >
-    <Input type="checkbox" {...props} />
+    <Input ref={ref} type="checkbox" {...props} />
     <Label>{label}</Label>
   </CheckboxRoot>
 );
 
-ButtonCheckbox.defaultProps = {
-  disabled: false
-};
+export const ButtonCheckbox = forwardRef(ButtonCheckboxComponent);

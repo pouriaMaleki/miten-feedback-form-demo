@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { usePrevious } from "@chakra-ui/react";
 import { Reactions } from "./constants";
 import { useReactionAnimations } from "./ReactionsForm/useReactionAnimations";
 import { AnimatedEmojiButton } from "./ReactionsForm/AnimatedEmojiButton";
+import { FC } from "react";
 
 const Root = styled.div`
   display: inline-grid;
@@ -10,17 +10,22 @@ const Root = styled.div`
   grid-gap: 3px;
   justify-items: center;
   align-items: center;
+  margin: 30px 0;
 `;
 
-export const ReactionsForm = ({ reaction, selectReaction }) => {
-  const prevReaction = usePrevious(reaction);
+type Props = {
+  reaction: Reactions | null;
+  selectReaction: (reaction: Reactions) => () => void;
+};
+
+export const ReactionsForm: FC<Props> = ({ reaction, selectReaction }) => {
   const [
     horribleAnimation,
     badAnimation,
     mehAnimation,
     goodAnimation,
     awesomeAnimation
-  ] = useReactionAnimations(reaction, prevReaction);
+  ] = useReactionAnimations(reaction);
 
   return (
     <Root>
@@ -29,30 +34,40 @@ export const ReactionsForm = ({ reaction, selectReaction }) => {
         emoji="😠"
         label="Horrible"
         animation={horribleAnimation}
+        tabIndex={
+          // To disable focus when it's not showing
+          reaction === null || reaction === Reactions.HORRIBLE ? null : -1
+        }
       ></AnimatedEmojiButton>
       <AnimatedEmojiButton
         onClick={selectReaction(Reactions.BAD)}
         emoji="😕"
         label="Bad"
         animation={badAnimation}
+        tabIndex={reaction === null || reaction === Reactions.BAD ? null : -1}
       ></AnimatedEmojiButton>
       <AnimatedEmojiButton
         onClick={selectReaction(Reactions.MEH)}
         emoji="😐"
         label="Meh"
         animation={mehAnimation}
+        tabIndex={reaction === null || reaction === Reactions.MEH ? null : -1}
       ></AnimatedEmojiButton>
       <AnimatedEmojiButton
         onClick={selectReaction(Reactions.GOOD)}
         emoji="😊"
         label="Good"
         animation={goodAnimation}
+        tabIndex={reaction === null || reaction === Reactions.GOOD ? null : -1}
       ></AnimatedEmojiButton>
       <AnimatedEmojiButton
         onClick={selectReaction(Reactions.AWESOME)}
         emoji="😍"
         label="Awesome"
         animation={awesomeAnimation}
+        tabIndex={
+          reaction === null || reaction === Reactions.AWESOME ? null : -1
+        }
       ></AnimatedEmojiButton>
     </Root>
   );

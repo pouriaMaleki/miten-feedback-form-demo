@@ -1,6 +1,6 @@
 import { FC, CSSProperties } from "react";
 import { animated } from "react-spring";
-import { EmojiButton, Props as EmojiButtonProps } from "../EmojiButton";
+import { EmojiButton, Props as EmojiButtonProps } from "./EmojiButton";
 
 type Props = {
   animation: CSSProperties;

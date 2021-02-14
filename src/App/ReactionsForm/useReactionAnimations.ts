@@ -1,3 +1,4 @@
+import { usePrevious } from "@chakra-ui/react";
 import { useSpring } from "react-spring";
 import { Reactions } from "../constants";
 
@@ -10,10 +11,12 @@ const useReactionAnimation = (
   const hideAnimation = useSpring(
     currentReaction
       ? {
+          opacity: 1,
           from: { opacity: 1 },
           to: { opacity: 0 }
         }
       : {
+          opacity: 0,
           from: { opacity: 0 },
           to: { opacity: 1 }
         }
@@ -23,10 +26,10 @@ const useReactionAnimation = (
     currentReaction
       ? {
           from: { transform: "translate(0,0)" },
-          to: { transform: `translate(${offsetMoveX}px,-150px)` }
+          to: { transform: `translate(${offsetMoveX}px,-120px)` }
         }
       : {
-          from: { transform: `translate(${offsetMoveX}px,-150px)` },
+          from: { transform: `translate(${offsetMoveX}px,-120px)` },
           to: { transform: "translate(0,0)" }
         }
   );
@@ -37,10 +40,8 @@ const useReactionAnimation = (
   return hideAnimation;
 };
 
-export const useReactionAnimations = (
-  reaction: Reactions,
-  prevReaction: Reactions
-) => {
+export const useReactionAnimations = (reaction: Reactions | null) => {
+  const prevReaction = usePrevious(reaction);
   const horrible = useReactionAnimation(
     Reactions.HORRIBLE,
     reaction,
