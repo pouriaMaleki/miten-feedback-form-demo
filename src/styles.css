@@ -1,5 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
   text-align: center;
-  background-color: #eee;
+  background-color: #dfeaff;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }

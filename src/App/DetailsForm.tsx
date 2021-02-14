@@ -53,7 +53,7 @@ export const DetailsForm: FC<Props> = ({ items, reaction, setReaction }) => {
       ))}
       <Label>
         <span>Write something for the organizer</span>
-        <Textarea name="comment" ref={register()} />
+        <Textarea variant="filled" name="comment" ref={register()} />
       </Label>
       <Buttons>
         <ButtonContainer>

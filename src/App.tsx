@@ -6,11 +6,13 @@ import { ReactionsForm } from "./App/ReactionsForm";
 import { DetailsForm } from "./App/DetailsForm";
 import { getTitle } from "./App/getTitle";
 import { useAppAnimations } from "./App/useAppAnimations";
+import { Footer } from "./App/Footer";
 
 const Root = styled.div`
+  height: 100%;
   display: grid;
   justify-items: center;
-  align-items: center;
+  grid-template-rows: 1fr 60px;
 `;
 
 const Container = styled.div`
@@ -67,6 +69,7 @@ export default function App() {
           />
         </animated.div>
       </Container>
+      <Footer />
     </Root>
   );
 }
