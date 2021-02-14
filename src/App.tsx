@@ -6,6 +6,7 @@ import { ReactionsForm } from "./App/ReactionsForm";
 import { DetailsForm } from "./App/DetailsForm";
 import { getTitle } from "./App/getTitle";
 import { useAppAnimations } from "./App/useAppAnimations";
+import { Submited } from "./App/Submited";
 import { Footer } from "./App/Footer";
 
 const Root = styled.div`
@@ -43,6 +44,7 @@ const detailsList = [
 ];
 
 export default function App() {
+  const [submited, setSubmited] = useState(false);
   const [reaction, setReaction] = useState<Reactions | null>(null);
   const [
     subtitleAnimation,
@@ -52,6 +54,12 @@ export default function App() {
 
   const selectReaction = (r: Reactions) => () =>
     reaction ? setReaction(null) : setReaction(r);
+
+  const handleSubmit = () => setSubmited(true);
+
+  if (submited) {
+    return <Submited />;
+  }
 
   return (
     <Root>
@@ -66,6 +74,7 @@ export default function App() {
             items={detailsList}
             reaction={reaction}
             setReaction={setReaction}
+            onSubmit={handleSubmit}
           />
         </animated.div>
       </Container>

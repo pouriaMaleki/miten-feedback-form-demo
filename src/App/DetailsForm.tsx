@@ -28,13 +28,22 @@ type Props = {
   items: string[];
   reaction: Reactions | null;
   setReaction: (reaction: Reactions | null) => void;
+  onSubmit: () => void;
 };
 
-export const DetailsForm: FC<Props> = ({ items, reaction, setReaction }) => {
+export const DetailsForm: FC<Props> = ({
+  items,
+  reaction,
+  setReaction,
+  onSubmit
+}) => {
   const { handleSubmit, register, reset } = useForm<FormValues>();
   const submit = (values: FormValues) => {
     const formValues = { ...values, reaction };
-    alert(JSON.stringify(formValues));
+    console.log(formValues);
+
+    onSubmit();
+    // alert(JSON.stringify(formValues));
   };
   const handleReset = () => {
     setReaction(null);
